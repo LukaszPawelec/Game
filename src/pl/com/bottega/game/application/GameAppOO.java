@@ -10,16 +10,17 @@ public class GameAppOO {
         short gamesCount = readGamesCount();
 
         //HumanPlayer human = new HumanPlayer("Andrzej");
-        Player computer = new ComputerPlayer("HAL");
-        Player computer2 = new ComputerPlayer("Deep Blue");
+        Player player1 = new ComputerPlayer("HAL");
+        Player player2 = new ComputerPlayer("Deep Blue");
 
-        Arbiter arbiter = new Arbiter(gamesCount, computer2, computer);
-        ScoreBoard primaryScoreBoard = new ScoreBoard(gamesCount, computer2.getName(), computer.getName());
+        Arbiter arbiter = new Arbiter(gamesCount, player1, player2);
+        ScoreBoard primaryScoreBoard = new ScoreBoard(gamesCount, player1.getName(), player2.getName());
 
-        for (short counter = 0; counter<=gamesCount; counter++) {
-            byte result = arbiter.playRound();
+        byte result = 0;
+        do{
+            result = arbiter.playRound();
             primaryScoreBoard.refresh(result);
-        }
+        }while(result != -1);
     }
 
     private static short readGamesCount() {
